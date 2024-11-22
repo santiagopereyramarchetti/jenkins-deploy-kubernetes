@@ -120,7 +120,8 @@ pipeline {
             }
         }
 
-        // Hasta aca deberia andar
+        // FUNCIONA - FALTA DEPLOY EN KUBERNETES.
+        // Probar primero de forma manual
 
         // stage('Deployando nueva release'){
         //     steps{

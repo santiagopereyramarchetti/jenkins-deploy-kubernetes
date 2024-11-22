@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init
+data:
+  DB_USER: backend
+  DB_PASSWORD: password
+  MAX_WAIT: "240"
+  WAIT_INTERVAL: "10"
+  MYSQL_SERVICE_NAME: "mysql"
