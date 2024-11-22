@@ -5,7 +5,7 @@ metadata:
 data:
   APP_NAME: Laravel
   APP_ENV: local
-  APP_KEY: 
+  APP_KEY: base64:v0sZWLRwfYkcVyDG3iUWKNsrQhD6GzV5JEQFmWnv4xw=
   APP_DEBUG: "false"
   APP_DEBUG: "true"
   APP_TIMEZONE: UTC
