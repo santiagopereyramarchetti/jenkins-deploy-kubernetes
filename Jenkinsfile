@@ -39,6 +39,7 @@ pipeline {
         LARAVEL_ENV = credentials('laravel-env')
         MYSQL_ENV = credentials('mysql-env')
         INIT_ENV_BUILD = credentials('ini-env-build')
+        INIT_ENV = credentials('ini-env')
 
     }
 
@@ -55,6 +56,7 @@ pipeline {
                 script{
                     writeFile file: '.env', text: readFile(LARAVEL_ENV)
                     writeFile file: '.env.mysql', text: readFile(MYSQL_ENV)
+                    writeFile file: '.env.ini', text: readFile(INIT_ENV)
                     writeFile file: '.env.ini.build', text: readFile(INIT_ENV_BUILD)
                     sh 'docker compose -f docker-compose.ci.yml up -d'
                     sh 'docker wait inicialization'
