@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: santiagopereyramarchetti/nginx:1.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "16Mi"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api/health-check
+          #     port: 80
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 30
+          #   failureThreshold: 2
+          #   timeoutSeconds: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/health-check
+          #     port: 80
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 30
+          #   failureThreshold: 1
+          #   timeoutSeconds: 3
+          ports:
+            - containerPort: 80

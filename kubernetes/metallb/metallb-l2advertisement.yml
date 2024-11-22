@@ -1,0 +1,11 @@
+es corresponde al de este ejemplo:
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: my-l2advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - my-pool
+  interfaces:
+  - enp0s3
