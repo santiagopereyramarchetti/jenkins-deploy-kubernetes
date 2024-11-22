@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: santiagopereyramarchetti/api:1.0
+          image: santiagopereyramarchetti/api:1.2
           imagePullPolicy: Always
           resources:
             requests:

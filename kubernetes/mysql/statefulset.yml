@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: santiagopereyramarchetti/mysql:1.0
+          image: santiagopereyramarchetti/mysql:1.2
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:

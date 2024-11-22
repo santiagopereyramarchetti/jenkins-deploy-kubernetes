@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: santiagopereyramarchetti/nginx:1.0
+          image: santiagopereyramarchetti/nginx:1.2
           imagePullPolicy: Always
           resources:
             requests:

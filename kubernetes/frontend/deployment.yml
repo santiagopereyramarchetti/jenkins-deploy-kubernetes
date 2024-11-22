@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: santiagopereyramarchetti/frontend:1.0
+          image: santiagopereyramarchetti/frontend:1.2
           imagePullPolicy: Always
           resources:
             requests:
