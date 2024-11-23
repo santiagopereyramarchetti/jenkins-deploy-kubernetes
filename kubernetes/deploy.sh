@@ -1,15 +1,23 @@
 #!/bin/bash
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-config.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-init.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-mysql.yml
 
-# 2 - Deployar configs
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/persistent-volume-claim.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/statefulset.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/service.yml
 
-# 3 - Deployar mysql 
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/persistent-volume-claim.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/statefulset.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/service.yml
 
-# 4 - Deployar redis
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/api/deployment.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/api/service.yml
 
-# 5 - Deployar api
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/nginx/deployment.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/nginx/service.yml
 
-# 6 - Deployar nginx
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/deployment.yml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/service.yml
 
-# 7 - Deployar frontend
-
-# 8 - Deployar ingress
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/ingress.yaml
