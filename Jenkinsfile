@@ -120,34 +120,36 @@ pipeline {
             }
         }
 
-        // FUNCIONA - FALTA DEPLOY EN KUBERNETES.
-        // Probar primero de forma manual
+        stage('Deployando nueva release'){
+            steps{
+                script{
+                    sh '''
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-config.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-init.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/common/app-mysql.yml
 
-        // stage('Deployando nueva release'){
-        //     steps{
-        //         sshagent(credentials: ['onpremise-vps']){
-        //             sh '''
-        //                 ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} 'rm -rf ~/.env && rm -rf ~/.env.mysql && rm -rf ~/.env.ini && rm -rf ~/docker-compose.yml'
-    
-        //                 scp -o StrictHostKeyChecking=no ${LARAVEL_ENV} ${REMOTE_HOST}:~/.env
-        //                 scp -o StrictHostKeyChecking=no ${MYSQL_ENV} ${REMOTE_HOST}:~/.env.mysql
-        //                 scp -o StrictHostKeyChecking=no ${INIT_ENV} ${REMOTE_HOST}:~/.env.ini
-        //                 scp -o StrictHostKeyChecking=no ./docker-compose.yml ${REMOTE_HOST}:~/docker-compose.yml
-    
-        //                 ssh -o StrictHostKeyChecking=no ${REMOTE_HOST} "export MYSQL_IMAGE_NAME='${MYSQL_IMAGE_NAME}' \
-        //                     export API_IMAGE_NAME='${API_IMAGE_NAME}' \
-        //                     export NGINX_IMAGE_NAME='${NGINX_IMAGE_NAME}' \
-        //                     export FRONTEND_IMAGE_NAME='${FRONTEND_IMAGE_NAME}' \
-        //                     export PROXY_IMAGE_NAME='${PROXY_IMAGE_NAME}' \
-        //                     export REDIS_IMAGE_NAME='${REDIS_IMAGE_NAME}' \
-        //                     export REDIS_CONTAINER_NAME='${REDIS_CONTAINER_NAME}' \
-        //                     export REDIS_CONTAINER_NAME='${LARAVEL_ENV_SECRET}' \
-        //                     export REDIS_CONTAINER_NAME='${INIT_ENV_SECRET}' \
-        //                     && docker stack deploy -c docker-compose.yml my-app"
-        //             '''
-        //         }
-        //     }
-        // }
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/persistent-volume-claim.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/statefulset.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/mysql/service.yml
+
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/persistent-volume-claim.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/statefulset.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/redis/service.yml
+
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/api/deployment.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/api/service.yml
+
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/nginx/deployment.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/nginx/service.yml
+
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/deployment.yml
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/service.yml
+
+                        kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/ingress/ingress.yaml
+                    '''
+                }
+            }
+        }
 
 
     }

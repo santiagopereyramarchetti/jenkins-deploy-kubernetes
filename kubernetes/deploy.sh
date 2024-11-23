@@ -20,4 +20,4 @@ kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/nginx/service.yml
 kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/deployment.yml
 kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/frontend/service.yml
 
-kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/ingress.yaml
+kubectl --kubeconfig=/home/.kube/config apply -f ./kubernetes/ingress/ingress.yaml
